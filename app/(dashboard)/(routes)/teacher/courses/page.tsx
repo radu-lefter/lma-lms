@@ -1,11 +1,15 @@
-
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 const CoursesPage = () => {
 
-
   return ( 
     <div className="p-6">
-      Courses page
+      <Link href="/teacher/create">
+      <Button>
+        New course
+      </Button>
+      </Link>
     </div>
    );
 }
