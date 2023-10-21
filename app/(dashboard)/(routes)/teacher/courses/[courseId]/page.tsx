@@ -12,6 +12,8 @@ import { TitleForm } from "./_components/title-form";
 import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
 import { CategoryForm } from "./_components/category-form";
+import { PriceForm } from "./_components/price-form";
+import { AttachmentForm } from "./_components/attachement-form";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -24,6 +26,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     where: {
       id: params.courseId,
     },
+    include: {
+      attachments: {
+        orderBy: {
+          createdAt: "desc",
+        }
+      }
+    }
   });
 
   if (!course) {
@@ -121,10 +130,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                   Sell your course
                 </h2>
               </div>
-              {/* <PriceForm
+              <PriceForm
                 initialData={course}
                 courseId={course.id}
-              /> */}
+              />
             </div>
             <div>
               <div className="flex items-center gap-x-2">
@@ -133,10 +142,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                   Resources & Attachments
                 </h2>
               </div>
-              {/* <AttachmentForm
+              <AttachmentForm
                 initialData={course}
                 courseId={course.id}
-              /> */}
+              />
             </div>
           </div>
         </div>
